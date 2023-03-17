@@ -14,12 +14,12 @@ jobs:
     - name: Getting Toolchain
       run: |
         sudo apt-get install lib32z1 ccache
-        sudo git clone --depth 1 --branch android-5.1.1_r28 --single-branch https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9 /opt/toolchains/aarch64-linux-android-4.9/
+        sudo git clone --depth 1 --branch android-5.1.1_r34 --single-branch https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-eabi-4.8 /opt/toolchains/arm-eabi-4.8
     - name: Building Kernel
       run: |
         export KBUILD_BUILD_USER=notnoelchannel
         export KBUILD_BUILD_HOST=unlegacy-devices
-        make -j22 msm8916_sec_defconfig VARIANT_DEFCONFIG=msm8916_sec_j3lte_spr_defconfig SELINUX_DEFCONFIG=selinux_defconfig
+        make -j22 ARCH=arm msm8916_sec_defconfig VARIANT_DEFCONFIG=msm8916_sec_j3lte_spr_defconfig SELINUX_DEFCONFIG=selinux_defconfig
         make -j128
     - name: Moving Output # CI only
       run: |
